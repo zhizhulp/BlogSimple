@@ -5,8 +5,8 @@
 # Site
 title: 简
 subtitle:
-description:
-keywords:
+description: 一个简单的技术博客。
+keywords: blog
 author: Simple
 language: zh-Hans
 timezone: Asia/Shanghai

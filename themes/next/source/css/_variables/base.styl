@@ -101,7 +101,7 @@ $font-size-larger         = $font-size-base + 4px
 
 // Headings font size
 $font-size-headings-step    = 2px
-$font-size-headings-base    = 24px
+$font-size-headings-base    = 20px
 $font-size-headings-base    = unit(hexo-config('font.headings.size'), px) if hexo-config('font.headings.size') is a 'unit'
 $font-size-headings-small   = $font-size-headings-base - $font-size-headings-step
 $font-size-headings-smaller = $font-size-headings-small - $font-size-headings-step
@@ -109,7 +109,7 @@ $font-size-headings-large   = $font-size-headings-base + $font-size-headings-ste
 $font-size-headings-larger  = $font-size-headings-large + $font-size-headings-step
 
 // Global line height
-$line-height-base           = 2
+$line-height-base           = 1.6
 $line-height-code-block     = 1.6  // Can't be less than 1.3
 
 
@@ -128,14 +128,14 @@ $zindex-5       = 1050
 // Table
 // --------------------------------------------------
 $table-width                    = 100%
-$table-border-color             = $gray-lighter
-$table-font-size                = 14px
+$table-border-color             = $orange//$gray-lighter
+$table-font-size                = 12px
 $table-content-alignment        = left
 $table-content-vertical         = middle
-$table-th-font-weight           = 700
+$table-th-font-weight           = 600
 $table-cell-padding             = 8px
-$table-cell-border-right-color  = $gainsboro
-$table-cell-border-bottom-color = $gray-lighter
+$table-cell-border-right-color  = $orange//$gainsboro
+$table-cell-border-bottom-color = $orange//$gray-lighter
 $table-row-odd-bg-color         = #f9f9f9
 $table-row-hover-bg-color       = $whitesmoke
 
@@ -160,8 +160,8 @@ $btn-font-weight                = normal
 $btn-default-radius             = 0
 $btn-default-bg                 = $black-deep
 $btn-default-color              = white
-$btn-default-font-size          = 14px
-$btn-default-border-width       = 2px
+$btn-default-font-size          = 10px
+$btn-default-border-width       = 1px
 $btn-default-border-color       = $black-deep
 $btn-default-hover-bg           = white
 $btn-default-hover-color        = $black-deep
@@ -197,9 +197,9 @@ $main-desktop-large             = 1200px
 $content-desktop                = 700px
 $content-desktop-large          = 900px
 
-$content-desktop-padding        = 40px
-$content-tablet-padding         = 10px
-$content-mobile-padding         = 8px
+$content-desktop-padding        = 15px//40px 文章padding边距
+$content-tablet-padding         = 3.75px//10px 文章padding边距
+$content-mobile-padding         = 3px//8px 文章padding边距
 
 $sidebar-desktop                = 240px
 

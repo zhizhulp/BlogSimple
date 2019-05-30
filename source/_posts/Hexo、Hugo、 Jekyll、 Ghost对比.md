@@ -6,7 +6,6 @@ tags: [web,静态页面生成器,markdown]
 categories: web
 ---
 Hexo、Hugo、 Jekyll、 Ghost都是生成静态网站的框架。
-
 我们先来比较一下：（Github上4个框架的数据来自2019年5月28号）
 
 |        | Github star数量 | issues(open) | issues(close) |    语言    | 多语言 | 收费 |
@@ -17,7 +16,6 @@ Hexo、Hugo、 Jekyll、 Ghost都是生成静态网站的框架。
 | Ghost  |      30.0k      |      82      |     5310      | JavaScript | 不确定 |  收  |
 
 从表格可以看出（综合Github star和issues来看）
-
 1. 最活跃的框架是Ghost，没错，因为Ghost是收费的。对于一个只想玩玩的个人开发者来说，我并不建议使用Ghost来搭建个人博客。
 2. Jekyll最受欢迎，并且免费。
 
