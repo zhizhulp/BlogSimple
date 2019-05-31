@@ -9,11 +9,11 @@ categories: [web]
 
 ##### 安装Git
 
-下载[git-for-windows](https://gitforwindows.org/)，然后一步一步安装。
+下载[git-for-windows](https://gitforwindows.org/) ，然后一步一步安装。
 
 ##### 安装Node
 
-下载[node](https://nodejs.org/en/download/)，然后一步一步安装。
+下载[node](https://nodejs.org/en/download/) ，然后一步一步安装。
 
 ##### 安装Hexo
 
@@ -27,27 +27,20 @@ npm install hexo-cli -g
 
 ``` bash
 hexo init blog
-```
-``` bash
 cd blog
-```
-
-``` bash
 npm install
 ```
-
 ##### Hexo的本地测试
 ``` bash
 hexo s
 ```
-
 ##### Hexo部署
+首先在你的github新建一个仓库，名字必须为仓库名.githun.io。
+打开blog根目录下的_config.yml文件，加入或修改成以下配置
 
-首先在你的github新建一个仓库，名字必须威仓库名.githun.io。
-
-打开blog根目录下的_config.yml文件，加入或修改成以下配置：
-
+```
 deploy:
-  type: git
-  repo: git@github.com:仓库名/仓库名.github.io.git
-  branch: master
+type: git
+repo: git@github.com:仓库名/仓库名.github.io.git
+branch: master
+```
