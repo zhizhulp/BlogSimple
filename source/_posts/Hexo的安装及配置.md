@@ -5,7 +5,6 @@ tags: [Hexo]
 categories: [web]
 ---
 
-### Hexo的安装
 
 ##### 安装Git
 
@@ -21,7 +20,6 @@ categories: [web]
 npm install hexo-cli -g 
 ```
 
-### Hexo的配置
 
 ##### Hexo的初始化
 
