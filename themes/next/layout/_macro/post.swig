@@ -306,8 +306,8 @@
         {% elif theme.auto_excerpt.enable %}
           {% set content = post.content | replace('<td class="gutter">.*?</td>', "", "g") | striptags %}
             <p>
-              {{ content.substring(0, theme.auto_excerpt.length) }}
-              {% if content.length > theme.auto_excerpt.length %}...{% endif %}
+		{{ content.substring(0, theme.auto_excerpt.length) }}
+		{% if content.length > theme.auto_excerpt.length %}...{% endif %}
             </p>
           <!--noindex-->
           {% if theme.read_more_btn %}

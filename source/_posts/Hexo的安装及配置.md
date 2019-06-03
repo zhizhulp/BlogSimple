@@ -29,11 +29,13 @@ cd blog
 npm install
 ```
 ##### Hexo的本地测试
+
 ``` bash
 hexo s
 ```
 ##### Hexo部署
-首先在你的github新建一个仓库，名字必须为仓库名.githun.io。
+
+首先在你的github新建一个仓库，名字必须为仓库名.github.io。
 打开blog根目录下的_config.yml文件，加入或修改成以下配置
 
 ```
