@@ -13,7 +13,11 @@ categories: Jetpack
 
 ##### 如何处理on stop events?
 
-Event.ON_STOP 并不是随着Activity生命周期onStop()调用的，而是伴随着Activity生命周期中的onSaveInstanceState()，onStop()是在onSaveInstanceState()后面调用的。下面是[demo]( https://github.com/zhizhulp/JetPackDemo.git)中的log：
+Event.ON_STOP 并不是随着Activity生命周期onStop()调用的，而是伴随着Activity生命周期中的onSaveInstanceState()，onStop()是在onSaveInstanceState()后面调用的。
+
+在 官方文档 中有这样一个小问题，为了使流程更简单，并与旧版本提供更好的兼容性，从版本1.0.0 RC1开始，Lifecycle对象被标记为CREATED，当onSaveInstanceState()被调用时， ON_STOP事件被分发，而不需等待调用onStop()方法。**这不太可能影响您的代码**，但这里你需要注意，因为它与API级别26和更低的Activity类中的调用顺序不匹配。所以这里不做详细的研究（之前一直对这里耿耿于怀）。
+
+下面是[demo]( https://github.com/zhizhulp/JetPackDemo.git) (Android8.0)中的log：
 
 
 ```
@@ -35,6 +39,13 @@ Event.ON_STOP 并不是随着Activity生命周期onStop()调用的，而是伴�
 2019-06-03 18:30:07.497 9831-9831/com.example.jetpackdemo D/LocationM: start-STARTED
 2019-06-03 18:30:07.497 9831-9831/com.example.jetpackdemo D/MainActivity_LocationM: onResume
 2019-06-03 18:30:07.500 9831-9831/com.example.jetpackdemo D/LocationM: resume-RESUMED
+//MainActivity销毁
+2019-06-04 09:42:24.156 13677-13677/com.example.jetpackdemo D/LocationM: pause-STARTED
+2019-06-04 09:42:24.158 13677-13677/com.example.jetpackdemo D/MainActivity_LocationM: onPause
+2019-06-04 09:42:24.638 13677-13677/com.example.jetpackdemo D/LocationM: stop-CREATED
+2019-06-04 09:42:24.638 13677-13677/com.example.jetpackdemo D/MainActivity_LocationM: onStop
+2019-06-04 09:42:24.646 13677-13677/com.example.jetpackdemo D/LocationM: destroy-DESTROYED
+2019-06-04 09:42:24.647 13677-13677/com.example.jetpackdemo D/MainActivity_LocationM: onDestroy
 ```
 
 ##### 如何理解State?
@@ -55,7 +66,67 @@ Event.ON_STOP 并不是随着Activity生命周期onStop()调用的，而是伴�
 
 ```
 if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-	// do something 保证数据回调回来，当前activity是存在的，也就是State必须为STARTED、RESUMED，		   Activity此时的状态应该为onStart、onResume、onPause。
+	// do something 保证数据回调回来，当前activity是存在的，也就是State必须为STARTED、RESUMED，Activity此时的状态应该为onStart、onResume、onPause。
  }
 ```
 
+##### Activity如何实现Lifecycle
+
+AppcompatActivity默认实现了LifecycleOwner，但是在开发当中一些第三方库使用了Activity，有时候我们也需要实现Lifecycle的功能。代码如下：
+
+```kotlin
+package com.example.jetpackdemo
+
+import android.app.Activity
+import android.os.Bundle
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
+
+open class LifeOwnerActivity: Activity(),LifecycleOwner {
+    private val register:LifecycleRegistry = LifecycleRegistry(this)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        register.currentState = Lifecycle.State.CREATED
+    }
+
+    override fun getLifecycle(): Lifecycle {
+        return register
+    }
+
+    override fun onStart() {
+        super.onStart()
+        register.currentState = Lifecycle.State.STARTED
+    }
+
+    override fun onResume() {
+        super.onResume()
+        register.currentState = Lifecycle.State.RESUMED
+    }
+
+    override fun onPause() {
+        super.onPause()
+        register.currentState = Lifecycle.State.STARTED
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        register.currentState = Lifecycle.State.CREATED
+    }
+
+    override fun onStop() {
+        super.onStop()
+        register.currentState = Lifecycle.State.CREATED
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        register.currentState = Lifecycle.State.DESTROYED
+    }
+    
+}
+```
+
+
+
+本篇博客历时1.5天。
