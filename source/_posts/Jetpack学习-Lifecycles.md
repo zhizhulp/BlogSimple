@@ -1,7 +1,7 @@
 ---
 title: Jetpack学习-Lifecycles
 date: 2019-06-03 10:35:53
-tags: [Android，Jetpack]
+tags: [Android,Jetpack]
 categories: Jetpack
 ---
 
