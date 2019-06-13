@@ -13,7 +13,7 @@ timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://www.zhizhulp.com
+url: http://zhizhulp.gitee.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -78,8 +78,11 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
+#  type: git
+#  repo: git@github.com:zhizhulp/zhizhulp.github.io.git
+#  branch: master
   type: git
-  repo: git@github.com:zhizhulp/zhizhulp.github.io.git
+  repo: git@gitee.com:zhizhulp/zhizhulp.git
   branch: master
  
 search:
