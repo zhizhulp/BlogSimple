@@ -56,3 +56,40 @@ fun loadImage(view: ImageView, url: String, error: Drawable) {
 }
 ```
 
+使用@get:Bindable无法生成BR文件的解决办法
+
+```
+apply plugin: 'kotlin-kapt'
+```
+
+BindingAdapter有个很重要的作用，举例说明：
+
+```kotlin
+data class User(val name:String)
+```
+
+```xml
+<TextView
+	android:text="@{user.name}"/>
+```
+
+```
+val user = User("xiaoli")
+```
+
+正常来说binding框架会调用TextView.setText()方法，来显示结果即：xiaoli，但是我希望显示是大写的，那么可以这么写：
+
+```kotlin
+@BindingAdapter("android:text")
+fun setText(TextView view, CharSequence text) {
+    val newText = text.toString().toUpercase()
+    view.text = newText;
+}
+```
+
+总结来说
+
+当在任意一个View的任意一个属性上使用binding表达式时，DataBinding框架的处理过程分成三步：
+ 1、对binding表达式求值
+ 2、寻找合适的BindingAdapter，如果找到，就调用它的方法
+ 3、如果没有找到合适的BindingAdapter，就在View上寻找合适的方法调用
